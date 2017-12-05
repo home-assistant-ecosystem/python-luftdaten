@@ -64,9 +64,7 @@ class Luftdaten(object):
             raise exceptions.LuftdatenConnectionError()
 
         try:
-            self.data = data
-
-            for sensor_data in self.data:
+            for sensor_data in data:
                 entry = sensor_data['sensordatavalues'][0]
                 for measurement in self.values.keys():
                     if measurement == entry['value_type']:
