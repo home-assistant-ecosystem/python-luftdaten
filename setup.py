@@ -14,9 +14,9 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='luftdaten',
-    version='0.1',
+    version='0.1.1',
     description='Python API for interacting with luftdaten.info.',
-    url='https://github.com/fabaff/python-luftdatent',
+    url='https://github.com/fabaff/python-luftdaten',
     download_url='https://github.com/fabaff/python-luftdaten/releases',
     author='Fabian Affolter',
     author_email='fabian@affolter-engineering.ch',
