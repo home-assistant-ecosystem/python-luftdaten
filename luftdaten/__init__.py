@@ -64,15 +64,14 @@ class Luftdaten(object):
             raise exceptions.LuftdatenConnectionError()
 
         try:
-            for sensor_data in data:
-                entry = sensor_data['sensordatavalues'][0]
+            sensor_data = sorted(data, key=lambda timestamp: timestamp['timestamp'], reverse=True)[0]
+            for entry in sensor_data['sensordatavalues']:
                 for measurement in self.values.keys():
                     if measurement == entry['value_type']:
                         self.values[measurement] = float(entry['value'])
 
             self.meta['sensor_id'] = self.sensor_id
-            self.meta['longitude'] = float(data[-1]['location']['longitude'])
-            self.meta['latitude'] = float(data[-1]['location']['latitude'])
-
+            self.meta['longitude'] = float(sensor_data['location']['longitude'])
+            self.meta['latitude'] = float(sensor_data['location']['latitude'])
         except (TypeError, IndexError):
             raise exceptions.LuftdatenError()
