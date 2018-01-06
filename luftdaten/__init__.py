@@ -1,5 +1,5 @@
 """
-Copyright (c) 2017 Fabian Affolter <fabian@affolter-engineering.ch>
+Copyright (c) 2017-2018 Fabian Affolter <fabian@affolter-engineering.ch>
 
 Licensed under MIT. All rights reserved.
 """
@@ -63,8 +63,12 @@ class Luftdaten(object):
             _LOGGER.error("Can not load data from luftdaten.info")
             raise exceptions.LuftdatenConnectionError()
 
+        print(data)
         try:
-            sensor_data = sorted(data, key=lambda timestamp: timestamp['timestamp'], reverse=True)[0]
+            sensor_data = sorted(
+                data, key=lambda timestamp: timestamp['timestamp'],
+                reverse=True)[0]
+            print(sensor_data)
             for entry in sensor_data['sensordatavalues']:
                 for measurement in self.values.keys():
                     if measurement == entry['value_type']:

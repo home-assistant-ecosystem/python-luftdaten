@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
+"""
+Copyright (c) 2017-2018 Fabian Affolter <fabian@affolter-engineering.ch>
 
+Licensed under MIT. All rights reserved.
+"""
 import os
 import sys
 
@@ -21,7 +25,7 @@ setup(
     author='Fabian Affolter',
     author_email='fabian@affolter-engineering.ch',
     license='MIT',
-    install_requires=['aiohttp'],
+    install_requires=['aiohttp', 'async_timeout'],
     packages=['luftdaten'],
     zip_safe=True,
     classifiers=[
