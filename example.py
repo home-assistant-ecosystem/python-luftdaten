@@ -4,16 +4,16 @@ Copyright (c) 2017-2018 Fabian Affolter <fabian@affolter-engineering.ch>
 Licensed under MIT. All rights reserved.
 """
 import asyncio
+
 import aiohttp
 
 from luftdaten import Luftdaten
 
 
-@asyncio.coroutine
-def main():
+async def main():
     with aiohttp.ClientSession() as session:
         data = Luftdaten(155, loop, session)
-        yield from data.async_get_data()
+        await data.async_get_data()
 
         # Print the sensor values
         print("Sensor values:", data.values)
