@@ -5,8 +5,6 @@ Copyright (c) 2017-2018 Fabian Affolter <fabian@affolter-engineering.ch>
 Licensed under MIT. All rights reserved.
 """
 import os
-from os import path
-
 import sys
 
 try:
@@ -14,9 +12,9 @@ try:
 except ImportError:
     from distutils.core import setup
 
-here = path.abspath(path.dirname(__file__))
+here = os.path.abspath(os.path.dirname(__file__))
 
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 if sys.argv[-1] == 'publish':
@@ -25,7 +23,7 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='luftdaten',
-    version='0.1.4',
+    version='0.2.0',
     description='Python API for interacting with luftdaten.info.',
     long_description=long_description,
     url='https://github.com/fabaff/python-luftdaten',
@@ -44,7 +42,8 @@ setup(
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: Microsoft :: Windows',
         'Operating System :: POSIX',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Utilities',
     ],
 )
