@@ -33,7 +33,7 @@ class Luftdaten(object):
             }
         self.meta = {}
 
-    async def async_get_data(self):
+    async def get_data(self):
         """Retrieve the data."""
         url = '{}/{}/{}/'.format(_RESOURCE, 'sensor', self.sensor_id)
 

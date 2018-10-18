@@ -14,7 +14,7 @@ async def main():
     """Sample code to retrieve the data."""
     async with aiohttp.ClientSession() as session:
         data = Luftdaten(155, loop, session)
-        await data.async_get_data()
+        await data.get_data()
 
         # Print the sensor values
         print("Sensor values:", data.values)
