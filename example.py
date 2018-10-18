@@ -11,7 +11,8 @@ from luftdaten import Luftdaten
 
 
 async def main():
-    with aiohttp.ClientSession() as session:
+    """Sample code to retrieve the data."""
+    async with aiohttp.ClientSession() as session:
         data = Luftdaten(155, loop, session)
         await data.async_get_data()
 
