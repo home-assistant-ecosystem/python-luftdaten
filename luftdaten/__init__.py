@@ -23,7 +23,6 @@ class Luftdaten(object):
         self._loop = loop
         self._session = session
         self.sensor_id = sensor_id
-        self.data = None
         self.values = {
                 'humidity': None,
                 'P1': None,
@@ -48,6 +47,10 @@ class Luftdaten(object):
         except (asyncio.TimeoutError, aiohttp.ClientError):
             _LOGGER.error("Can not load data from luftdaten.info")
             raise exceptions.LuftdatenConnectionError()
+
+        if not data:
+            self.values = self.meta = None
+            return
 
         try:
             sensor_data = sorted(
