@@ -1,6 +1,12 @@
 Changes
 =======
 
+20181021 - 0.3.2
+----------------
+
+- Check if a given station is vaild
+- Update example
+
 
 20181020 - 0.3.1
 ----------------
