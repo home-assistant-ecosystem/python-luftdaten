@@ -1,10 +1,16 @@
 Changes
 =======
 
+20181021 - 0.3.3
+----------------
+
+- Refactor sensor check
+- Update example
+
 20181021 - 0.3.2
 ----------------
 
-- Check if a given station is vaild
+- Check if a given station is valid
 - Update example
 
 
