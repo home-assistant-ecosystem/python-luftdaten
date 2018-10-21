@@ -16,14 +16,11 @@ async def main():
     """Sample code to retrieve the data."""
     async with aiohttp.ClientSession() as session:
         data = Luftdaten(SENSOR_ID, loop, session)
+        await data.get_data()
 
-        valid = await data.validate_sensor(SENSOR_ID)
-
-        if not valid:
+        if not await data.validate_sensor():
             print("Station is not available:", data.sensor_id)
             return
-
-        await data.get_data()
 
         if data.values and data.meta:
             # Print the sensor values

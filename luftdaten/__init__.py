@@ -23,6 +23,7 @@ class Luftdaten(object):
         self._loop = loop
         self._session = session
         self.sensor_id = sensor_id
+        self.data = None
         self.values = {
                 'humidity': None,
                 'P1': None,
@@ -42,19 +43,19 @@ class Luftdaten(object):
 
             _LOGGER.debug(
                 "Response from luftdaten.info: %s", response.status)
-            data = await response.json()
-            _LOGGER.debug(data)
+            self.data = await response.json()
+            _LOGGER.debug(self.data)
         except (asyncio.TimeoutError, aiohttp.ClientError):
             _LOGGER.error("Can not load data from luftdaten.info")
             raise exceptions.LuftdatenConnectionError()
 
-        if not data:
+        if not self.data:
             self.values = self.meta = None
             return
 
         try:
             sensor_data = sorted(
-                data, key=lambda timestamp: timestamp['timestamp'],
+                self.data, key=lambda timestamp: timestamp['timestamp'],
                 reverse=True)[0]
 
             for entry in sensor_data['sensordatavalues']:
@@ -69,18 +70,6 @@ class Luftdaten(object):
         except (TypeError, IndexError):
             raise exceptions.LuftdatenError()
 
-    async def validate_sensor(self, sensor_id):
+    async def validate_sensor(self):
         """Return True if the sensor ID is valid."""
-        try:
-            with async_timeout.timeout(5, loop=self._loop):
-                response = await self._session.get(
-                    '{}/{}/'.format(self.url, sensor_id))
-
-            _LOGGER.debug(
-                "Response from luftdaten.info: %s", response.status)
-            data = await response.json()
-        except (asyncio.TimeoutError, aiohttp.ClientError):
-            _LOGGER.error("Can not load data from luftdaten.info")
-            raise exceptions.LuftdatenConnectionError()
-
-        return True if data else False
+        return True if self.data else False
