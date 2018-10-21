@@ -9,16 +9,21 @@ import aiohttp
 
 from luftdaten import Luftdaten
 
+SENSOR_ID = 155
+
 
 async def main():
     """Sample code to retrieve the data."""
     async with aiohttp.ClientSession() as session:
-        data = Luftdaten(155, loop, session)
-        await data.get_data()
+        data = Luftdaten(SENSOR_ID, loop, session)
 
-        if not data.valid_sensor:
+        valid = await data.validate_sensor(SENSOR_ID)
+
+        if not valid:
             print("Station is not available:", data.sensor_id)
             return
+
+        await data.get_data()
 
         if data.values and data.meta:
             # Print the sensor values

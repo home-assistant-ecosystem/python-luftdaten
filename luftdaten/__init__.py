@@ -31,14 +31,14 @@ class Luftdaten(object):
                 'temperature': None,
             }
         self.meta = {}
+        self.url = '{}/{}'.format(_RESOURCE, 'sensor')
 
     async def get_data(self):
         """Retrieve the data."""
-        url = '{}/{}/{}/'.format(_RESOURCE, 'sensor', self.sensor_id)
-
         try:
             with async_timeout.timeout(5, loop=self._loop):
-                response = await self._session.get(url)
+                response = await self._session.get(
+                    '{}/{}/'.format(self.url, self.sensor_id))
 
             _LOGGER.debug(
                 "Response from luftdaten.info: %s", response.status)
@@ -69,7 +69,18 @@ class Luftdaten(object):
         except (TypeError, IndexError):
             raise exceptions.LuftdatenError()
 
-    @property
-    def valid_sensor(self):
+    async def validate_sensor(self, sensor_id):
         """Return True if the sensor ID is valid."""
-        return True if self.values else False
+        try:
+            with async_timeout.timeout(5, loop=self._loop):
+                response = await self._session.get(
+                    '{}/{}/'.format(self.url, sensor_id))
+
+            _LOGGER.debug(
+                "Response from luftdaten.info: %s", response.status)
+            data = await response.json()
+        except (asyncio.TimeoutError, aiohttp.ClientError):
+            _LOGGER.error("Can not load data from luftdaten.info")
+            raise exceptions.LuftdatenConnectionError()
+
+        return True if data else False
