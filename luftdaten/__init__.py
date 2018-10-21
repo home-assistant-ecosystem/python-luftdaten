@@ -68,3 +68,8 @@ class Luftdaten(object):
             self.meta['latitude'] = float(sensor_data['location']['latitude'])
         except (TypeError, IndexError):
             raise exceptions.LuftdatenError()
+
+    @property
+    def valid_sensor(self):
+        """Return True if the sensor ID is valid."""
+        return True if self.values else False

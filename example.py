@@ -16,14 +16,16 @@ async def main():
         data = Luftdaten(155, loop, session)
         await data.get_data()
 
+        if not data.valid_sensor:
+            print("Station is not available:", data.sensor_id)
+            return
+
         if data.values and data.meta:
             # Print the sensor values
             print("Sensor values:", data.values)
 
             # Print the coordinates fo the sensor
             print("Location:", data.meta['latitude'], data.meta['longitude'])
-        else:
-            print("Station is not available:", data.sensor_id)
 
 
 loop = asyncio.get_event_loop()
