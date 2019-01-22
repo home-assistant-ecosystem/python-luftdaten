@@ -1,8 +1,4 @@
-"""
-Copyright (c) 2017-2018 Fabian Affolter <fabian@affolter-engineering.ch>
-
-Licensed under MIT. All rights reserved.
-"""
+"""Wrapper to get the measurings from a Luftdaten station."""
 import asyncio
 import logging
 
