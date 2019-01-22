@@ -1,6 +1,11 @@
 Changes
 =======
 
+Not released
+------------
+
+- Update docstrings
+
 20181021 - 0.3.4
 ----------------
 
