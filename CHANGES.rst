@@ -4,6 +4,12 @@ Changes
 Not released
 ------------
 
+- No changes
+
+20190210 - 0.5.0
+----------------
+
+- Limit data to P1 and P2
 - Update docstrings
 
 20181021 - 0.3.4
