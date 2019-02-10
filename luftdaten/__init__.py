@@ -21,12 +21,9 @@ class Luftdaten(object):
         self.sensor_id = sensor_id
         self.data = None
         self.values = {
-                'humidity': None,
-                'P1': None,
-                'P2': None,
-                'pressure': None,
-                'temperature': None,
-            }
+            'P1': None,
+            'P2': None,
+        }
         self.meta = {}
         self.url = '{}/{}'.format(_RESOURCE, 'sensor')
 
@@ -53,6 +50,7 @@ class Luftdaten(object):
             sensor_data = sorted(
                 self.data, key=lambda timestamp: timestamp['timestamp'],
                 reverse=True)[0]
+            print(sensor_data)
 
             for entry in sensor_data['sensordatavalues']:
                 for measurement in self.values.keys():
