@@ -14,6 +14,12 @@ The module is available from the `Python Package Index <https://pypi.python.org/
 
     $ pip3 install luftdaten
 
+On a Fedora-based system.
+
+.. code:: bash
+
+    $ sudo dnf -y install python3-luftdaten
+
 Usage
 -----
 
