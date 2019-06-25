@@ -1,10 +1,10 @@
 Changes
 =======
 
-Not released
-------------
+20190625 - 0.6.0
+----------------
 
-- No changes
+- Better handling of empty API responses (thanks @jvanderneutstulen)
 
 20190210 - 0.5.0
 ----------------

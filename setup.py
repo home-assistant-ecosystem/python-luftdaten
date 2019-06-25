@@ -19,7 +19,7 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='luftdaten',
-    version='0.5.0',
+    version='0.6.0',
     description='Python API for interacting with luftdaten.info.',
     long_description=long_description,
     url='https://github.com/fabaff/python-luftdaten',
