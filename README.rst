@@ -1,7 +1,7 @@
 python-luftdaten
 ================
 
-Python API for interacting with `luftdaten.info <http://luftdaten.info/>`_.
+Python client for interacting with `luftdaten.info <http://luftdaten.info/>`_.
 
 This module is not official, developed, supported or endorsed by luftdaten.info.
 
