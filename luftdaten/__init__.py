@@ -43,7 +43,8 @@ class Luftdaten(object):
             raise exceptions.LuftdatenConnectionError()
 
         if not self.data:
-            self.values = self.meta = None
+            for measurement in self.values.keys():
+                self.values[measurement] = None
             return
 
         try:
