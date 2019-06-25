@@ -51,7 +51,6 @@ class Luftdaten(object):
             sensor_data = sorted(
                 self.data, key=lambda timestamp: timestamp['timestamp'],
                 reverse=True)[0]
-            print(sensor_data)
 
             for entry in sensor_data['sensordatavalues']:
                 for measurement in self.values.keys():
