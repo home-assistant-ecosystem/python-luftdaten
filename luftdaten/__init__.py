@@ -20,10 +20,7 @@ class Luftdaten(object):
         self._session = session
         self.sensor_id = sensor_id
         self.data = None
-        self.values = {
-            'P1': None,
-            'P2': None,
-        }
+        self.values = {}
         self.meta = {}
         self.url = '{}/{}'.format(_RESOURCE, 'sensor')
 
@@ -53,6 +50,8 @@ class Luftdaten(object):
                 reverse=True)[0]
 
             for entry in sensor_data['sensordatavalues']:
+                if entry['value_type'] not in self.values.keys():
+                    self.values[entry['value_type']] = None
                 for measurement in self.values.keys():
                     if measurement == entry['value_type']:
                         self.values[measurement] = float(entry['value'])
