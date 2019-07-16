@@ -1,6 +1,11 @@
 Changes
 =======
 
+20190716 - 0.6.2
+----------------
+
+- Only add value types if reported by the API (thanks @cgtobi)
+
 20190625 - 0.6.1
 ----------------
 
