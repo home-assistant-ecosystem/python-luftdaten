@@ -27,9 +27,11 @@ class Luftdaten(object):
     async def get_data(self):
         """Retrieve the data."""
         try:
-            with async_timeout.timeout(5, loop=self._loop):
-                response = await self._session.get(
-                    '{}/{}/'.format(self.url, self.sensor_id))
+            url = '{}/{}/'.format(self.url, self.sensor_id)
+            _LOGGER.debug(
+                "Requesting luftdaten.info: %s", url)
+            with async_timeout.timeout(60, loop=self._loop):
+                response = await self._session.get(url)
 
             _LOGGER.debug(
                 "Response from luftdaten.info: %s", response.status)
