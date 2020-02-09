@@ -27,7 +27,7 @@ setup(
     author='Fabian Affolter',
     author_email='fabian@affolter-engineering.ch',
     license='MIT',
-    install_requires=['aiohttp', 'async_timeout'],
+    install_requires=['aiohttp<4', 'async_timeout<4'],
     packages=['luftdaten'],
     zip_safe=True,
     classifiers=[
