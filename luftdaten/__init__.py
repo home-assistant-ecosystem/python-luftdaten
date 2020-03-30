@@ -8,7 +8,7 @@ import async_timeout
 from . import exceptions
 
 _LOGGER = logging.getLogger(__name__)
-_RESOURCE = 'https://api.luftdaten.info/v1'
+_RESOURCE = 'https://data.sensor.community/airrohr/v1'
 
 
 class Luftdaten(object):
