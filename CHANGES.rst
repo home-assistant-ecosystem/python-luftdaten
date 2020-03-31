@@ -1,6 +1,11 @@
 Changes
 =======
 
+20200331 - 0.6.4
+----------------
+
+- Use new API endpoint (thanks @mattsches)
+
 20190816 - 0.6.3
 ----------------
 
