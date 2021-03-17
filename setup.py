@@ -14,7 +14,7 @@ with open(os.path.join(here, "README.rst"), encoding="utf-8") as readme_file:
 
 setup(
     name="luftdaten",
-    version="0.6.4",
+    version="0.6.5",
     description="Python API for interacting with luftdaten.info.",
     long_description=long_description,
     url="https://github.com/home-assistant-ecosystem/python-luftdaten",
