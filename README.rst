@@ -25,7 +25,7 @@ available. The lastest release is usually present in the ``unstable`` channel.
 
 .. code:: bash
 
-    $nix-env -iA nixos.python39Packages.luftdaten
+    $ nix-env -iA nixos.python39Packages.luftdaten
 
 Usage
 -----
