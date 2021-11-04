@@ -30,7 +30,7 @@ class Luftdaten(object):
             url = '{}/{}/'.format(self.url, self.sensor_id)
             _LOGGER.debug(
                 "Requesting luftdaten.info: %s", url)
-            with async_timeout.timeout(60, loop=self._loop):
+            with async_timeout.timeout(60):
                 response = await self._session.get(url)
 
             _LOGGER.debug(
