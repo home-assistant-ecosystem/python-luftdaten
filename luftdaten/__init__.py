@@ -6,7 +6,7 @@ import httpx
 from . import exceptions
 
 _LOGGER = logging.getLogger(__name__)
-_RESOURCE = 'https://data.sensor.community/airrohr/v1'
+_RESOURCE = "https://data.sensor.community/airrohr/v1"
 
 
 class Luftdaten(object):
@@ -18,11 +18,11 @@ class Luftdaten(object):
         self.data = None
         self.values = {}
         self.meta = {}
-        self.url = '{}/{}'.format(_RESOURCE, 'sensor')
+        self.url = "{}/{}".format(_RESOURCE, "sensor")
 
     async def get_data(self):
         """Retrieve the data."""
-        url = '{}/{}/'.format(self.url, self.sensor_id)
+        url = "{}/{}/".format(self.url, self.sensor_id)
 
         try:
             async with httpx.AsyncClient() as client:
@@ -47,21 +47,20 @@ class Luftdaten(object):
 
         try:
             sensor_data = sorted(
-                self.data, key=lambda timestamp: timestamp['timestamp'],
-                reverse=True)[0]
+                self.data, key=lambda timestamp: timestamp["timestamp"], reverse=True
+            )[0]
 
-            for entry in sensor_data['sensordatavalues']:
-                if entry['value_type'] not in self.values.keys():
-                    self.values[entry['value_type']] = None
+            for entry in sensor_data["sensordatavalues"]:
+                if entry["value_type"] not in self.values.keys():
+                    self.values[entry["value_type"]] = None
                 for measurement in self.values.keys():
-                    if measurement == entry['value_type']:
-                        self.values[measurement] = float(entry['value'])
+                    if measurement == entry["value_type"]:
+                        self.values[measurement] = float(entry["value"])
 
-            self.meta['sensor_id'] = self.sensor_id
-            self.meta['longitude'] = float(
-                sensor_data['location']['longitude'])
-            self.meta['latitude'] = float(sensor_data['location']['latitude'])
-            self.meta['altitude'] = float(sensor_data['location']['altitude'])
+            self.meta["sensor_id"] = self.sensor_id
+            self.meta["longitude"] = float(sensor_data["location"]["longitude"])
+            self.meta["latitude"] = float(sensor_data["location"]["latitude"])
+            self.meta["altitude"] = float(sensor_data["location"]["altitude"])
         except (TypeError, IndexError):
             raise exceptions.LuftdatenError()
 
