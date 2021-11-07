@@ -1,9 +1,7 @@
 """Wrapper to get the measurings from a Luftdaten station."""
-import asyncio
 import logging
 
-import aiohttp
-import async_timeout
+import httpx
 
 from . import exceptions
 
@@ -14,10 +12,8 @@ _RESOURCE = 'https://data.sensor.community/airrohr/v1'
 class Luftdaten(object):
     """A class for handling the data retrieval."""
 
-    def __init__(self, sensor_id, loop, session):
+    def __init__(self, sensor_id):
         """Initialize the connection."""
-        self._loop = loop
-        self._session = session
         self.sensor_id = sensor_id
         self.data = None
         self.values = {}
@@ -26,20 +22,23 @@ class Luftdaten(object):
 
     async def get_data(self):
         """Retrieve the data."""
-        try:
-            url = '{}/{}/'.format(self.url, self.sensor_id)
-            _LOGGER.debug(
-                "Requesting luftdaten.info: %s", url)
-            with async_timeout.timeout(60, loop=self._loop):
-                response = await self._session.get(url)
+        url = '{}/{}/'.format(self.url, self.sensor_id)
 
-            _LOGGER.debug(
-                "Response from luftdaten.info: %s", response.status)
-            self.data = await response.json()
-            _LOGGER.debug(self.data)
-        except (asyncio.TimeoutError, aiohttp.ClientError):
-            _LOGGER.error("Can not load data from luftdaten.info")
-            raise exceptions.LuftdatenConnectionError()
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.get(str(url))
+        except httpx.ConnectError:
+            raise exceptions.LuftdatenConnectionError(f"Connection to {url} failed")
+
+        if response.status_code == httpx.codes.OK:
+            try:
+                _LOGGER.debug(response.json())
+                self.data = response.json()
+            except TypeError:
+                _LOGGER.error("Can not load data from Luftdaten API")
+                raise exceptions.LuftdatenConnectionError(
+                    "Unable to get the data from Luftdaten API"
+                )
 
         if not self.data:
             for measurement in self.values.keys():
