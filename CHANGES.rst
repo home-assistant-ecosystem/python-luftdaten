@@ -1,6 +1,14 @@
 Changes
 =======
 
+20211107 - 0.7.0
+----------------
+
+- Add support for altitude
+- Add basic tests
+- Migrate to httpx
+- Migrate to pyproject
+
 20210317 - 0.6.5
 ----------------
 
