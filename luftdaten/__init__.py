@@ -61,6 +61,7 @@ class Luftdaten(object):
             self.meta['longitude'] = float(
                 sensor_data['location']['longitude'])
             self.meta['latitude'] = float(sensor_data['location']['latitude'])
+            self.meta['altitude'] = float(sensor_data['location']['altitude'])
         except (TypeError, IndexError):
             raise exceptions.LuftdatenError()
 
