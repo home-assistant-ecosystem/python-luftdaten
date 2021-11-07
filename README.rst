@@ -1,9 +1,9 @@
 python-luftdaten
 ================
 
-Python client for interacting with `luftdaten.info <http://luftdaten.info/>`_.
+Python client for interacting with `sensor.community <https://sensor.community/>`_ (previously known as `luftdaten.info <http://luftdaten.info/>`_.
 
-This module is not official, developed, supported or endorsed by luftdaten.info.
+This module is not official, developed, supported or endorsed by sensor.community/luftdaten.info.
 
 Installation
 ------------
