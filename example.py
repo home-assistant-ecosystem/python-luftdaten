@@ -20,7 +20,12 @@ async def main():
         print("Sensor values:", data.values)
 
         # Print the coordinates fo the sensor
-        print("Location:", data.meta["latitude"], data.meta["longitude"])
+        print(
+            "Location:",
+            data.meta["latitude"],
+            data.meta["longitude"],
+            data.meta["altitude"],
+        )
 
 
 loop = asyncio.get_event_loop()
