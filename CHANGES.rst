@@ -1,6 +1,11 @@
 Changes
 =======
 
+20220104 - 0.7.2
+----------------
+
+- Support for later pytest-httpx releases
+
 20211125 - 0.7.1
 ----------------
 
