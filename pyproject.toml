@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "luftdaten"
-version = "0.7.2"
+version = "0.7.3"
 description = "Python API for interacting with luftdaten.info"
 authors = ["Fabian Affolter <mail@fabian-affolter.ch>"]
 license = "MIT"
