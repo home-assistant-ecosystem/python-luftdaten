@@ -29,6 +29,10 @@ class Luftdaten(object):
                 response = await client.get(str(url))
         except httpx.ConnectError:
             raise exceptions.LuftdatenConnectionError(f"Connection to {url} failed")
+        except httpx.ConnectTimeout:
+            raise exceptions.LuftdatenConnectionError(f"Connection to {url} timed out")
+        except httpx.ReadTimeout:
+            raise exceptions.LuftdatenConnectionError(f"Read timeout from {url}")
 
         if response.status_code == httpx.codes.OK:
             try:
