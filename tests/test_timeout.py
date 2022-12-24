@@ -8,6 +8,7 @@ from luftdaten.exceptions import LuftdatenConnectionError
 
 SENSOR_ID = 1
 
+
 @pytest.mark.asyncio
 async def test_connect_timeout(httpx_mock: HTTPXMock):
     """Test if the connection is hitting the timeout during connect."""
@@ -23,6 +24,7 @@ async def test_connect_timeout(httpx_mock: HTTPXMock):
     with pytest.raises(LuftdatenConnectionError):
         client = Luftdaten(SENSOR_ID)
         await client.get_data()
+
 
 @pytest.mark.asyncio
 async def test_read_timeout(httpx_mock: HTTPXMock):
