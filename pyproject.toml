@@ -27,7 +27,7 @@ python = "^3.12"
 httpx = ">=0.28,<1"
 
 [tool.poetry.dev-dependencies]
-black = "^23.3"
+black = "^25.12"
 pytest = "^7"
 isort = "^5.11"
 pytest-httpx = ">0.15,<1"
