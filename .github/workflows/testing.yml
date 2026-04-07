@@ -49,5 +49,7 @@ jobs:
         source .venv/bin/activate
         pytest tests/
 
-    - name: Black Code Formatter
-      uses: jpetrucciani/black-check@22.12.0
+    - name: Lint with ruff
+      run: |
+        pip install ruff
+        ruff check .
