@@ -1,6 +1,13 @@
 Changes
 =======
 
+0.7.5 - 2026-04-07
+------------------
+
+- Update dependencies
+- Migrate to ruff
+- Update workflow
+
 0.7.4 - 2022-11-08
 ------------------
 
