@@ -4,8 +4,6 @@ from pytest_httpx import HTTPXMock
 
 from luftdaten import Luftdaten
 
-import httpx
-
 SENSOR_ID = 1
 
 RESPONSE_VALID = [
