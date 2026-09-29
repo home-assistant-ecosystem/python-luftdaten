@@ -20,7 +20,7 @@ On a Fedora-based system or on a CentOS/RHEL machine with has EPEL enabled.
 
     $ sudo dnf -y install python3-luftdaten
 
-For Nix or NixOS is `pre-packed module <https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&query=luftdaten>`_
+For Nix or NixOS is a `pre-packed module <https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&query=luftdaten>`_
 available. The latest release is usually present in the ``unstable`` channel.
 
 .. code:: bash
