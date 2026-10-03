@@ -12,21 +12,25 @@ _RESOURCE = "https://data.sensor.community/airrohr/v1"
 class Luftdaten(object):
     """A class for handling the data retrieval."""
 
-    def __init__(self, sensor_id):
+    def __init__(self, sensor_id, httpx_client=None):
         """Initialize the connection."""
         self.sensor_id = sensor_id
         self.data = None
         self.values = {}
         self.meta = {}
         self.url = "{}/{}".format(_RESOURCE, "sensor")
+        self._httpx_client = httpx_client
 
     async def get_data(self):
         """Retrieve the data."""
         url = "{}/{}/".format(self.url, self.sensor_id)
 
         try:
-            async with httpx.AsyncClient() as client:
-                response = await client.get(str(url))
+            if self._httpx_client is not None:
+                response = await self._httpx_client.get(str(url))
+            else:
+                async with httpx.AsyncClient() as client:
+                    response = await client.get(str(url))
         except httpx.ConnectError:
             raise exceptions.LuftdatenConnectionError(f"Connection to {url} failed")
         except httpx.ConnectTimeout:

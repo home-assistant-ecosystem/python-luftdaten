@@ -1,4 +1,7 @@
 """Test the interaction with the Luftdaten API."""
+from unittest.mock import AsyncMock, MagicMock
+
+import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 
@@ -63,6 +66,28 @@ async def test_sensor_values(httpx_mock: HTTPXMock):
 
     client = Luftdaten(SENSOR_ID)
     await client.get_data()
+
+    assert client.values == {"temperature": 10.5, "humidity": 79.3}
+
+
+@pytest.mark.asyncio
+async def test_injected_client():
+    """Test that an injected HTTPX client is used and not closed."""
+    httpx_client = AsyncMock(spec=httpx.AsyncClient)
+    response = MagicMock(spec=httpx.Response)
+    response.status_code = httpx.codes.OK
+    response.json.return_value = RESPONSE_VALID
+    httpx_client.get.return_value = response
+
+    client = Luftdaten(SENSOR_ID, httpx_client=httpx_client)
+    await client.get_data()
+
+    httpx_client.get.assert_awaited_once_with(
+        "https://data.sensor.community/airrohr/v1/sensor/1/"
+    )
+    httpx_client.__aenter__.assert_not_awaited()
+    httpx_client.__aexit__.assert_not_awaited()
+    httpx_client.aclose.assert_not_awaited()
 
     assert client.values == {"temperature": 10.5, "humidity": 79.3}
 
