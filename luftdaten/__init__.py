@@ -9,7 +9,7 @@ _LOGGER = logging.getLogger(__name__)
 _RESOURCE = "https://data.sensor.community/airrohr/v1"
 
 
-class Luftdaten(object):
+class Luftdaten:
     """A class for handling the data retrieval."""
 
     def __init__(self, sensor_id):
@@ -22,7 +22,7 @@ class Luftdaten(object):
 
     async def get_data(self):
         """Retrieve the data."""
-        url = "{}/{}/".format(self.url, self.sensor_id)
+        url = f"{self.url}/{self.sensor_id}/"
 
         try:
             async with httpx.AsyncClient() as client:
@@ -45,19 +45,17 @@ class Luftdaten(object):
                 )
 
         if not self.data:
-            for measurement in self.values.keys():
+            for measurement in self.values:
                 self.values[measurement] = None
             return
 
         try:
-            sensor_data = sorted(
-                self.data, key=lambda timestamp: timestamp["timestamp"], reverse=True
-            )[0]
+            sensor_data = max(self.data, key=lambda timestamp: timestamp["timestamp"])
 
             for entry in sensor_data["sensordatavalues"]:
-                if entry["value_type"] not in self.values.keys():
+                if entry["value_type"] not in self.values:
                     self.values[entry["value_type"]] = None
-                for measurement in self.values.keys():
+                for measurement in self.values:
                     if measurement == entry["value_type"]:
                         self.values[measurement] = float(entry["value"])
 
@@ -70,4 +68,4 @@ class Luftdaten(object):
 
     async def validate_sensor(self):
         """Return True if the sensor ID is valid."""
-        return True if self.data else False
+        return bool(self.data)
