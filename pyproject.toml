@@ -28,7 +28,6 @@ httpx = ">=0.28,<1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^9"
-isort = "^5.11"
 pytest-httpx = ">0.15,<1"
 pytest-asyncio = "^0.16.0"
 
